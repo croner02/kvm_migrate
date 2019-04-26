@@ -67,7 +67,9 @@ class Migrate(object):
     @staticmethod
     def create_adminrc(ip):
         files = config.FILE_PATH["OPENSTACK_ADMINRC"] % ip
-        shell_cmd.shell_run("scp %s:/root/admin-openrc %s" % (ip, config.FILE_PATH["OPENSTACK_ADMINRC"] % ip), exec_mode='localhost')
+        admin_cmd = "sshpass -p %s scp %s:/root/admin-openrc %s" % (config.USER_INFO["password"], ip,
+                                                                    config.FILE_PATH["OPENSTACK_ADMINRC"] % ip)
+        shell_cmd.shell_run(admin_cmd, ip, exec_mode='localhost')
         logger.debug("create %s successfully" % config.FILE_PATH["OPENSTACK_ADMINRC"] % ip)
         return files
 
