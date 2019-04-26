@@ -18,7 +18,7 @@ class ModifyXml(object):
         tree = src_element["tree"]
         if src_element["element_count"] != dest_element["element_count"]:
             if not ("host" in key_path):
-                logger.error("%s must be equal")
+                logger.error("%s must be equal" % key_path)
                 raise Exception("%s must be equal" % key_path)
         for element_id, info in enumerate(dest_element["element"]):
             dest_element_key[element_id] = info
